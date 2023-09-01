@@ -11,7 +11,20 @@ body {
 
 .navbar-brand,
 .navbar-nav .nav-link {
-  color: white !important;
+  color: #007bff;
+}
+
+/* Header Search Custom Button */
+.searchButton {
+  background-color: white;
+  border: 2px solid #007bff;
+  color: #007bff;
+}
+
+.searchButton:hover {
+  background-color: #007bff;
+  border: 2px solid #007bff;
+  color: white;
 }
 
 /* Body Styles */
@@ -30,6 +43,32 @@ body {
 
 .card-title {
   color: #0056b3;
+}
+
+.buyButton {
+  background-color: #007bff;
+  border: 2px solid #007bff;
+  color: white;
+}
+
+.buyButton:hover {
+  background-color: white;
+  border: 2px solid #007bff;
+  color: #007bff;
+}
+
+.register,
+.login,
+.logout {
+  color: #0056b3;
+}
+
+.register:hover,
+.login:hover,
+.logout:hover {
+  background-color: white;
+  border: 2px solid #007bff;
+  color: #007bff;
 }
 
 /* Footer Styles */

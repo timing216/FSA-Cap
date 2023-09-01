@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-
+import "/src/App.css";
 interface Product {
   id: number;
   title: string;
@@ -15,7 +15,7 @@ const Body: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products?limit=5")
+    fetch("https://fakestoreapi.com/products?limit=10")
       .then((res) => res.json())
       .then((json) => setProducts(json));
   }, []);
@@ -51,7 +51,11 @@ const Body: React.FC = () => {
                 alt={selectedProduct.title}
                 width="100%"
               />
-              <Button variant="info" style={{ marginTop: "15px" }}>
+              <Button
+                className="buyButton"
+                variant="info"
+                style={{ marginTop: "15px" }}
+              >
                 Buy
               </Button>
             </>
