@@ -4,6 +4,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.headerContainer {
+  height: 30px;
+  padding-top: 20px;
+  margin-left: 0px;
+}
 /* Header Styles */
 .navbar {
   background-color: #007bff;
@@ -19,12 +24,32 @@ body {
   background-color: white;
   border: 2px solid #007bff;
   color: #007bff;
+  margin-left: 10px;
 }
 
 .searchButton:hover {
   background-color: #007bff;
   border: 2px solid #007bff;
   color: white;
+}
+
+.cartIcon {
+  background-color: white;
+  border: hidden;
+  color: #007bff;
+  margin-right: 10px;
+}
+
+.cartIcon:hover {
+  background-color: white;
+  border: hidden;
+  color: #007bff;
+  margin-right: 10px;
+}
+
+.AmasonLogo {
+  margin-top: 25px;
+  border: hidden;
 }
 
 /* Body Styles */
@@ -72,6 +97,16 @@ body {
 }
 
 /* Footer Styles */
+/* footer {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+
+  text-align: left;
+} */
 footer {
   background-color: #007bff;
   color: white;
@@ -79,4 +114,10 @@ footer {
   position: fixed;
   width: 100%;
   bottom: 0;
+  text-align: left;
+  z-index: 1000;
+}
+
+.footerCopyright {
+  padding-left: 40px;
 }

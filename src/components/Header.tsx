@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Container,
   Navbar,
@@ -7,15 +8,20 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
-
-import "/src/App.css";
+import "../App.css";
 
 const Header: React.FC = () => {
   return (
     <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="#home" className="AmasonLogo">
-          AMASON Shop
+      <Container style={{ paddingBottom: "0px" }} className="headerContainer">
+        <Navbar.Brand as={Link} to="/">
+          <img
+            alt="AMASON Shop"
+            src="./src/assets/Amason_logo.svg"
+            width="300"
+            height="300"
+            className="AmasonLogo"
+          />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -27,19 +33,22 @@ const Header: React.FC = () => {
                 className="mr-2"
                 aria-label="Search"
               />
-              <Button className="searchButton" variant="outline-info">
+              <Button className="searchButton" variant="outline-info me-5">
                 Search
               </Button>
+              <Nav.Link as={Link} to="/cart" className="me-4">
+                <i className="bi bi-cart cartIcon"></i>
+              </Nav.Link>
             </Form>
           </Nav>
           <Nav>
-            <Nav.Link href="#register" className="register">
+            <Nav.Link href="/register" className="register">
               Register
             </Nav.Link>
-            <Nav.Link href="#login" className="login">
+            <Nav.Link href="/login" className="login">
               Login
             </Nav.Link>
-            <Nav.Link href="#logout" className="logout">
+            <Nav.Link href="/logout" className="logout">
               Logout
             </Nav.Link>
           </Nav>

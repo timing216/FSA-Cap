@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import "/src/App.css";
+import "../App.css";
+
 interface Product {
   id: number;
   title: string;
@@ -10,18 +11,34 @@ interface Product {
   image: string;
 }
 
-const Body: React.FC = () => {
+const Home: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products?limit=10")
-      .then((res) => res.json())
-      .then((json) => setProducts(json));
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://fakestoreapi.com/products?limit=5"
+        );
+        if (!response.ok) {
+          throw new Error(
+            `Could not reach the store😢: ${response.statusText}`
+          );
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
-    <Container>
+    <Container style={{ paddingBottom: "0px" }} className="headerContainer">
       <Row>
         <Col md={8}>
           {products.map((product) => (
@@ -51,10 +68,16 @@ const Body: React.FC = () => {
                 alt={selectedProduct.title}
                 width="100%"
               />
+              {/* <Button variant="info" style={{ marginTop: "15px" }}>
+                Buy
+              </Button> */}
               <Button
-                className="buyButton"
                 variant="info"
                 style={{ marginTop: "15px" }}
+                onClick={() => {
+                  // scroll the window all the way down
+                  window.scrollTo(0, document.body.scrollHeight);
+                }}
               >
                 Buy
               </Button>
@@ -66,4 +89,4 @@ const Body: React.FC = () => {
   );
 };
 
-export default Body;
+export default Home;
