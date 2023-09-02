@@ -18,17 +18,17 @@ const Register: React.FC = () => {
   };
 
   return (
-    <Container className="registerContainer">
+    <Container>
       <h1>Register</h1>
       <Form>
         <Form.Group as={Row}>
           <Col>
             <Form.Label>First Name</Form.Label>
-            <Form.Control type="text" placeholder="First Name" required />
+            <Form.Control type="text" placeholder="First Name" />
           </Col>
           <Col>
             <Form.Label>Last Name</Form.Label>
-            <Form.Control type="text" placeholder="Last Name" required />
+            <Form.Control type="text" placeholder="Last Name" />
           </Col>
         </Form.Group>
 
