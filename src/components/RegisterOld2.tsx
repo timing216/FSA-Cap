@@ -57,6 +57,10 @@ const Register: React.FC = () => {
         </Form.Group>
 
         <Form.Group as={Row}>
+          <Col md={4}>
+            <Form.Label>City</Form.Label>
+            <Form.Control type="text" placeholder="City" />
+          </Col>
           <Col md={8}>
             <Form.Label>Zip Code</Form.Label>
             <Form.Control type="text" placeholder="Zip Code" />
@@ -89,7 +93,12 @@ const Register: React.FC = () => {
           </>
         )}
 
-        <Button variant="primary" type="submit" disabled={!emailValid}>
+        <Button
+          className="registerFormButton"
+          variant="primary"
+          type="submit"
+          disabled={!emailValid}
+        >
           Register
         </Button>
       </Form>

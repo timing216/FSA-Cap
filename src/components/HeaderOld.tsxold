@@ -10,11 +10,7 @@ import {
 } from "react-bootstrap";
 import "../App.css";
 
-interface HeaderProps {
-  isLoggedIn: boolean;
-}
-
-const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
+const Header: React.FC = () => {
   return (
     <Navbar bg="light" expand="lg">
       <Container style={{ paddingBottom: "0px" }} className="headerContainer">
@@ -46,21 +42,15 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
             </Form>
           </Nav>
           <Nav>
-            {!isLoggedIn && (
-              <>
-                <Nav.Link href="/register" className="register">
-                  Register
-                </Nav.Link>
-                <Nav.Link href="/login" className="login">
-                  Login
-                </Nav.Link>
-              </>
-            )}
-            {isLoggedIn && (
-              <Nav.Link href="/logout" className="logout">
-                Logout
-              </Nav.Link>
-            )}
+            <Nav.Link href="/register" className="register">
+              Register
+            </Nav.Link>
+            <Nav.Link href="/login" className="login">
+              Login
+            </Nav.Link>
+            <Nav.Link href="/logout" className="logout">
+              Logout
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

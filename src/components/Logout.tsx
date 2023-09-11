@@ -1,5 +1,5 @@
 const Logout = () => {
-  return <h1>Logout</h1>;
+  return <h3 className="loggedOut"> You are logged out.</h3>;
 };
 
 export default Logout;

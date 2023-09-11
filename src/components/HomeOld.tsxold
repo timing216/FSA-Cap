@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import "../App.css";
 
 interface Product {
   id: number;
@@ -10,14 +11,9 @@ interface Product {
   image: string;
 }
 
-interface HomeProps {
-  isLoggedIn: boolean;
-}
-
-const Home: React.FC<HomeProps> = ({ isLoggedIn }) => {
+const Home: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +29,7 @@ const Home: React.FC<HomeProps> = ({ isLoggedIn }) => {
         const data = await response.json();
         setProducts(data);
       } catch (error) {
-        setError(error.message);
+        console.error("Error fetching products:", error.message);
       }
     };
 
@@ -48,20 +44,18 @@ const Home: React.FC<HomeProps> = ({ isLoggedIn }) => {
             <Card key={product.id} style={{ marginBottom: "15px" }}>
               <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
-                {isLoggedIn && (
-                  <Button
-                    variant="primary"
-                    onClick={() => setSelectedProduct(product)}
-                  >
-                    View Details
-                  </Button>
-                )}
+                <Button
+                  variant="primary"
+                  onClick={() => setSelectedProduct(product)}
+                >
+                  View Details
+                </Button>
               </Card.Body>
             </Card>
           ))}
         </Col>
         <Col md={4}>
-          {isLoggedIn && selectedProduct && (
+          {selectedProduct && (
             <>
               <h3>{selectedProduct.title}</h3>
               <p>ID: {selectedProduct.id}</p>

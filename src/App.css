@@ -54,6 +54,7 @@ body {
   height: auto;
   margin-top: 25px;
   border: hidden;
+  margin-left: 0px;
 }
 
 /* Body Styles */
@@ -101,16 +102,6 @@ body {
 }
 
 /* Footer Styles */
-/* footer {
-  background-color: #007bff;
-  color: white;
-  padding: 10px;
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-
-  text-align: left;
-} */
 footer {
   background-color: white;
   color: white;
@@ -152,6 +143,22 @@ footer {
   color: white;
 }
 
+.registerFormButton {
+  margin-top: 10px;
+  background-color: #0056b3;
+  color: white;
+}
 .registerCheckbox {
   color: white;
+}
+
+.loginContinueBtn,
+.registerContinueBtn {
+  margin-top: 20px;
+  width: 38%;
+}
+
+.loggedOut {
+  padding-top: 2%;
+  text-align: center;
 }
