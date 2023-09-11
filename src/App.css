@@ -101,6 +101,14 @@ body {
   color: #007bff;
 }
 
+.cart {
+  margin-top: 5%;
+  margin-left: 8%;
+}
+
+.totalPriceInCart {
+  padding-left: 8%;
+}
 /* Footer Styles */
 footer {
   background-color: white;

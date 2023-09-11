@@ -17,14 +17,16 @@ const Cart: React.FC<CartProps> = ({ cart, setCart }) => {
   };
 
   return (
-    <div>
+    <div className="cart">
       <h2>Your Cart</h2>
       {cart.items.map((item) => (
         <div key={item.id}>
-          <span>
+          <span className="totalPriceInCart">
             {item.title} - ${item.price}
           </span>
-          <button onClick={() => handleRemove(item.id)}>Remove</button>
+          <button className="buyButton" onClick={() => handleRemove(item.id)}>
+            Remove
+          </button>
         </div>
       ))}
       <div>Total: ${cart.total}</div>
