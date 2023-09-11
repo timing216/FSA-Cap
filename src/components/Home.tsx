@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
-interface Product {
+export interface Product {
   id: number;
   title: string;
   price: number;
