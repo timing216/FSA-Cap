@@ -12,15 +12,15 @@ export interface Product {
 
 interface HomeProps {
   isLoggedIn: boolean;
+  cart: { items: Product[]; total: number };
+  setCart: React.Dispatch<
+    React.SetStateAction<{ items: Product[]; total: number }>
+  >;
 }
 
-const Home: React.FC<HomeProps> = ({ isLoggedIn }) => {
+const Home: React.FC<HomeProps> = ({ isLoggedIn, cart, setCart }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [cart, setCart] = useState<{ items: Product[]; total: number }>({
-    items: [],
-    total: 0,
-  });
 
   useEffect(() => {
     const fetchData = async () => {

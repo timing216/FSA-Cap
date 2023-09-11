@@ -22,7 +22,12 @@ function App() {
       <div className="App">
         <Header isLoggedIn={isLoggedIn} cart={cart} />
         <Routes>
-          <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
+          <Route
+            path="/"
+            element={
+              <Home isLoggedIn={isLoggedIn} cart={cart} setCart={setCart} />
+            }
+          />
           <Route path="/register" element={<Register />} />
           <Route
             path="/login"
