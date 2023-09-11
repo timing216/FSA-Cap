@@ -17,7 +17,10 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ isLoggedIn }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  // const [error, setError] = useState<string | null>(null);
+  const [cart, setCart] = useState<{ items: Product[]; total: number }>({
+    items: [],
+    total: 0,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,12 +36,19 @@ const Home: React.FC<HomeProps> = ({ isLoggedIn }) => {
         const data = await response.json();
         setProducts(data);
       } catch (error) {
-        ("There was an error");
+        console.error("There was an error", error);
       }
     };
 
     fetchData();
   }, []);
+
+  const handleBuy = (product: Product) => {
+    setCart((prevCart) => ({
+      items: [...prevCart.items, product],
+      total: prevCart.total + product.price,
+    }));
+  };
 
   return (
     <Container style={{ paddingBottom: "0px" }} className="headerContainer">
@@ -77,15 +87,17 @@ const Home: React.FC<HomeProps> = ({ isLoggedIn }) => {
                 className="buyButton"
                 variant="info"
                 style={{ marginTop: "15px" }}
-                onClick={() => {
-                  // scroll the window all the way down
-                  window.scrollTo(0, document.body.scrollHeight);
-                }}
+                onClick={() => handleBuy(selectedProduct)}
               >
                 Buy
               </Button>
             </>
           )}
+          <div>
+            Items in Cart: {cart.items.length}
+            <br />
+            Total Price: ${cart.total}
+          </div>
         </Col>
       </Row>
     </Container>

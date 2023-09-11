@@ -9,12 +9,17 @@ import {
   Button,
 } from "react-bootstrap";
 import "../App.css";
+import { Product } from "./Home";
 
 interface HeaderProps {
   isLoggedIn: boolean;
+  cart: {
+    items: Product[];
+    total: number;
+  };
 }
 
-const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
+const Header: React.FC<HeaderProps> = ({ isLoggedIn, cart }) => {
   return (
     <Navbar bg="light" expand="lg">
       <Container style={{ paddingBottom: "0px" }} className="headerContainer">
@@ -28,6 +33,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Form className="d-flex">
@@ -40,11 +46,16 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
               <Button className="searchButton" variant="outline-info me-5">
                 Search
               </Button>
-              <Nav.Link as={Link} to="/cart" className="me-4">
+              {/* <Nav.Link as={Link} to="/cart" className="me-4">
                 <i className="bi bi-cart cartIcon"></i>
-              </Nav.Link>
+              </Nav.Link> */}
             </Form>
           </Nav>
+          {/* <div>
+            Items in Cart: {cart.items.length}
+            <br />
+            Total Price: ${cart.total}
+          </div> */}
           <Nav>
             {!isLoggedIn && (
               <>
@@ -57,9 +68,17 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn }) => {
               </>
             )}
             {isLoggedIn && (
-              <Nav.Link href="/logout" className="logout">
-                Logout
-              </Nav.Link>
+              <>
+                <Nav.Link as={Link} to="/cart" className="me-5">
+                  <i className="bi bi-cart cartIcon"></i>
+                  <span className="cartDetails">
+                    Items: {cart.items.length} | Total: ${cart.total}
+                  </span>
+                </Nav.Link>
+                <Nav.Link href="/logout" className="logout">
+                  Logout
+                </Nav.Link>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>

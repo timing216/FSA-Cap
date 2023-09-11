@@ -20,7 +20,7 @@ function App() {
   return (
     <>
       <div className="App">
-        <Header isLoggedIn={isLoggedIn} />
+        <Header isLoggedIn={isLoggedIn} cart={cart} />
         <Routes>
           <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
           <Route path="/register" element={<Register />} />
