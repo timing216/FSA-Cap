@@ -1,5 +1,6 @@
 import React from "react";
-import { Product } from "./Home"; // Importing the Product interface
+import { Link } from "react-router-dom";
+import { Product } from "./Home";
 
 interface CartProps {
   cart: { items: Product[]; total: number };
@@ -18,18 +19,24 @@ const Cart: React.FC<CartProps> = ({ cart, setCart }) => {
 
   return (
     <div className="cart">
-      <h2>Your Cart</h2>
+      <h3>Your Cart</h3>
       {cart.items.map((item) => (
         <div key={item.id}>
           <span className="totalPriceInCart">
-            {item.title} - ${item.price}
+            {item.title} : ${item.price}
           </span>
-          <button className="buyButton" onClick={() => handleRemove(item.id)}>
+          <button
+            className="removeButton"
+            onClick={() => handleRemove(item.id)}
+          >
             Remove
           </button>
         </div>
       ))}
-      <div>Total: ${cart.total}</div>
+      <div className="cartTotal">Total: ${cart.total}</div>
+      <Link to="/checkout">
+        <button className="checkoutButton">Proceed to Checkout</button>
+      </Link>
     </div>
   );
 };

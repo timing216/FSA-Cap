@@ -70,11 +70,14 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, cart }) => {
             {isLoggedIn && (
               <>
                 <Nav.Link as={Link} to="/cart" className="me-5">
-                  <i className="bi bi-cart cartIcon"></i>
-                  <span className="cartDetails">
-                    Items: {cart.items.length} | Total: ${cart.total}
-                  </span>
+                  <div className="cartWrapper">
+                    <i className="bi bi-cart cartIcon"></i>
+                    <span className="cartDetails">
+                      Items: {cart.items.length} | Total: ${cart.total}
+                    </span>
+                  </div>
                 </Nav.Link>
+
                 <Nav.Link href="/logout" className="logout">
                   Logout
                 </Nav.Link>

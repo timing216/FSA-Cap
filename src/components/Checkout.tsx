@@ -1,50 +1,46 @@
-// "./components/Checkout"
-
-import React from "react";
-import { Container, Table, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-
-// Mock data for cart items
-const cartItems = [
-  { id: 1, title: "Item 1", price: 10 },
-  { id: 2, title: "Item 2", price: 20 },
-  // ...  more items as needed
-];
+import React, { useState } from "react";
+import { Container, Form, Button } from "react-bootstrap";
 
 const Checkout: React.FC = () => {
-  const navigate = useNavigate();
+  const [shippingInfo, setShippingInfo] = useState({
+    name: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    country: "",
+    phone: "",
+  });
 
-  // Calculate the total price
-  const totalPrice = cartItems.reduce((total, item) => total + item.price, 0);
+  const [paymentInfo, setPaymentInfo] = useState({
+    cardName: "",
+    cardNumber: "",
+    expiryDate: "",
+    cvv: "",
+  });
+
+  const handleCheckout = () => {
+    // Handle the checkout process here
+    // For now, just log the data
+    console.log("Shipping Info:", shippingInfo);
+    console.log("Payment Info:", paymentInfo);
+  };
 
   return (
     <Container>
-      <h1>Checkout</h1>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Item</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          {cartItems.map((item, index) => (
-            <tr key={item.id}>
-              <td>{index + 1}</td>
-              <td>{item.title}</td>
-              <td>{`$${item.price}`}</td>
-            </tr>
-          ))}
-          <tr>
-            <td colSpan={2}>Total</td>
-            <td>{`$${totalPrice}`}</td>
-          </tr>
-        </tbody>
-      </Table>
-      <Button variant="primary" onClick={() => navigate("/")}>
-        Complete Checkout
-      </Button>
+      <h3>Checkout</h3>
+
+      <Form onSubmit={handleCheckout}>
+        <h4>Shipping Information</h4>
+        {/* ... Add form fields for shipping info ... */}
+
+        <h4>Payment Information</h4>
+        {/* ... Add form fields for payment info ... */}
+
+        <Button className="completeCheckout" type="submit">
+          Complete Checkout
+        </Button>
+      </Form>
     </Container>
   );
 };

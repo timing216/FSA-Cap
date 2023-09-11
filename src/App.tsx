@@ -9,6 +9,7 @@ import Logout from "./components/Logout";
 import Login from "./components/Login";
 import { useState } from "react";
 import { Product } from "./components/Home";
+import Checkout from "./components/Checkout";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,6 +38,7 @@ function App() {
             path="/cart"
             element={<Cart cart={cart} setCart={setCart} />}
           />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/logout" element={<Logout />} />
         </Routes>
         <Footer />
