@@ -155,7 +155,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
         </Col>
 
         <Col md={4} className="rightContainer">
-          {/* Here, you can add the right container content */}
+          {/* add the right container content */}
         </Col>
       </Row>
     </Container>
