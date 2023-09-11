@@ -7,10 +7,15 @@ import Register from "./components/Register";
 import Cart from "./components/Cart";
 import Logout from "./components/Logout";
 import Login from "./components/Login";
-import React, { useState } from "react";
+import { useState } from "react";
+import { Product } from "./components/Home";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cart, setCart] = useState<{ items: Product[]; total: number }>({
+    items: [],
+    total: 0,
+  });
 
   return (
     <>
@@ -23,7 +28,10 @@ function App() {
             path="/login"
             element={<Login setIsLoggedIn={setIsLoggedIn} />}
           />
-          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/cart"
+            element={<Cart cart={cart} setCart={setCart} />}
+          />
           <Route path="/logout" element={<Logout />} />
         </Routes>
         <Footer />

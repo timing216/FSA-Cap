@@ -17,7 +17,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ isLoggedIn }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +33,7 @@ const Home: React.FC<HomeProps> = ({ isLoggedIn }) => {
         const data = await response.json();
         setProducts(data);
       } catch (error) {
-        setError(error.message);
+        ("There was an error");
       }
     };
 

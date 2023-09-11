@@ -1,4 +1,5 @@
 import React from "react";
+import { Product } from "./Home"; // Importing the Product interface
 
 interface CartProps {
   cart: { items: Product[]; total: number };
