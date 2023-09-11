@@ -74,6 +74,7 @@ const Home: React.FC<HomeProps> = ({ isLoggedIn }) => {
                 width="100%"
               />
               <Button
+                className="buyButton"
                 variant="info"
                 style={{ marginTop: "15px" }}
                 onClick={() => {

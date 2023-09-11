@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const cartItems = [
   { id: 1, title: "Item 1", price: 10 },
   { id: 2, title: "Item 2", price: 20 },
-  // ... Add more items as needed
+  // ...  more items as needed
 ];
 
 const Checkout: React.FC = () => {
