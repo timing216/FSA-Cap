@@ -38,7 +38,7 @@ function App() {
             path="/cart"
             element={<Cart cart={cart} setCart={setCart} />}
           />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<Checkout cart={cart} />} />
           <Route path="/logout" element={<Logout />} />
         </Routes>
         <Footer />
