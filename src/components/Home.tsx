@@ -70,7 +70,7 @@ const Home: React.FC<HomeProps> = ({ isLoggedIn, cart, setCart }) => {
             </Card>
           ))}
         </Col>
-        <Col md={4}>
+        <Col md={4} className="sticky">
           {isLoggedIn && selectedProduct && (
             <>
               <h3>{selectedProduct.title}</h3>

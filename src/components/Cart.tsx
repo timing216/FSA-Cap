@@ -23,6 +23,8 @@ const Cart: React.FC<CartProps> = ({ cart, setCart }) => {
       {cart.items.map((item) => (
         <div key={item.id}>
           <span className="totalPriceInCart">
+            {<img src={item.image} alt={item.title} width="50px%" />}
+            {"   "}
             {item.title} : ${parseFloat(item.price.toFixed(2))}
           </span>
           <button

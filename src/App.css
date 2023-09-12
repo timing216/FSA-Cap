@@ -62,7 +62,7 @@ body {
   margin-left: 0px;
 }
 
-/* Body Styles */
+/* Home Page (Body) Styles */
 .container {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -78,6 +78,13 @@ body {
 
 .card-title {
   color: #0056b3;
+}
+
+.sticky {
+  position: sticky;
+  top: 0; /* distance from the top edge of the viewport */
+  height: 100vh; /* height of the viewport */
+  overflow-y: auto; /* ensures the content is scrollable if it exceeds the viewport height */
 }
 
 .buyButton {
