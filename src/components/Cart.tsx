@@ -23,7 +23,7 @@ const Cart: React.FC<CartProps> = ({ cart, setCart }) => {
       {cart.items.map((item) => (
         <div key={item.id}>
           <span className="totalPriceInCart">
-            {item.title} : ${item.price}
+            {item.title} : ${parseFloat(item.price.toFixed(2))}
           </span>
           <button
             className="removeButton"

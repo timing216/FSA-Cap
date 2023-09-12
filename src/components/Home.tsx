@@ -26,7 +26,7 @@ const Home: React.FC<HomeProps> = ({ isLoggedIn, cart, setCart }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://fakestoreapi.com/products?limit=5"
+          "https://fakestoreapi.com/products?limit=25"
         );
         if (!response.ok) {
           throw new Error(
@@ -46,7 +46,7 @@ const Home: React.FC<HomeProps> = ({ isLoggedIn, cart, setCart }) => {
   const handleBuy = (product: Product) => {
     setCart((prevCart) => ({
       items: [...prevCart.items, product],
-      total: prevCart.total + product.price,
+      total: parseFloat((prevCart.total + product.price).toFixed(2)),
     }));
   };
 
