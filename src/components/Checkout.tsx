@@ -380,7 +380,6 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
               Checkout
             </Button>
           </Form>
-          // OFAC Start
           <Modal show={showPopup} onHide={() => setShowPopup(false)}>
             <Modal.Header closeButton>
               <Modal.Title>Shipping Restriction</Modal.Title>
