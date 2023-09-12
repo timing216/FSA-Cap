@@ -6,26 +6,26 @@ interface CheckoutProps {
   cart: { items: Product[]; total: number };
 }
 
+const blacklistedCountries = [
+  "AFG",
+  "BLR",
+  "ETH",
+  "IRN",
+  "IRQ",
+  "LBN",
+  "LBY",
+  "MLI",
+  "NIC",
+  "RUS",
+  "SDN",
+  "SOM",
+  "SYR",
+  "ZWE",
+];
+
 const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-
-  const blacklistedCountries = [
-    "AFG",
-    "BLR",
-    "ETH",
-    "IRN",
-    "IRQ",
-    "LBN",
-    "LBY",
-    "MLI",
-    "NIC",
-    "RUS",
-    "SDN",
-    "SOM",
-    "SYR",
-    "ZWE",
-  ];
 
   useEffect(() => {
     if (blacklistedCountries.includes(selectedCountry)) {
