@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, Form, Button, Row, Col } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Container, Form, Button, Row, Col, Modal } from "react-bootstrap";
 import { Product } from "./Home";
 
 interface CheckoutProps {
@@ -7,6 +7,34 @@ interface CheckoutProps {
 }
 
 const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
+  const blacklistedCountries = [
+    "AFG",
+    "BLR",
+    "ETH",
+    "IRN",
+    "IRQ",
+    "LBN",
+    "LBY",
+    "MLI",
+    "NIC",
+    "RUS",
+    "SDN",
+    "SOM",
+    "SYR",
+    "ZWE",
+  ];
+
+  useEffect(() => {
+    if (blacklistedCountries.includes(selectedCountry)) {
+      setShowPopup(true);
+    } else {
+      setShowPopup(false);
+    }
+  }, [selectedCountry]);
+
   return (
     <Container className="checkoutContainer">
       <Row>
@@ -15,11 +43,14 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
           <div className="cartTotal">
             Total: ${parseFloat(cart.total.toFixed(2))}
           </div>
-
           <Form>
             <Form.Group>
               <Form.Label className="checkoutFormLabel">
-                <Form.Control as="select" className="checkoutInput">
+                <Form.Control
+                  as="select"
+                  className="checkoutInput"
+                  onChange={(e) => setSelectedCountry(e.target.value)}
+                >
                   <option value="">Select Country</option>
                   <option value="AFG">Afghanistan</option>
                   <option value="AGO">Angola</option>
@@ -216,6 +247,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
               </Form.Label>
               <Form.Control type="text" className="checkoutInput" />
             </Form.Group>
+
             <Form.Group>
               <Form.Label className="checkoutFormLabel">
                 Full name (First and Last name, please use Alphabet)
@@ -348,6 +380,30 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
               Checkout
             </Button>
           </Form>
+          // OFAC Start
+          <Modal show={showPopup} onHide={() => setShowPopup(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Shipping Restriction</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              We are sorry but cannot ship to this country. For further
+              information, please check{" "}
+              <a
+                href="https://ofac.treasury.gov/sanctions-programs-and-country-information"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                here
+              </a>
+              .
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={() => setShowPopup(false)}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+          // OFAC End
         </Col>
 
         <Col md={4} className="rightContainer">
