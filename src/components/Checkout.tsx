@@ -403,11 +403,10 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
               </Button>
             </Modal.Footer>
           </Modal>
-          // OFAC End
         </Col>
 
         <Col md={4} className="rightContainer">
-          {/* add the right container content */}
+          {/* can add right container content */}
         </Col>
       </Row>
     </Container>
