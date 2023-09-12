@@ -277,18 +277,6 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
                 placeholder="Apt, suite, unit, building, floor, etc."
               />
             </Form.Group>
-            <Form.Group>
-              <Form.Label className="checkoutFormLabel">City</Form.Label>
-              <Form.Control type="text" className="checkoutInput" />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label className="checkoutFormLabel">State</Form.Label>
-              <Form.Control type="text" className="checkoutInput" />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label className="checkoutFormLabel">ZIP Code</Form.Label>
-              <Form.Control type="text" className="checkoutInput" />
-            </Form.Group>
             <Row>
               <Form.Group as={Col}>
                 <Form.Label className="checkoutFormLabel">City</Form.Label>

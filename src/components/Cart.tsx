@@ -1,4 +1,6 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Product } from "./Home";
 

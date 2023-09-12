@@ -26,7 +26,7 @@ const Home: React.FC<HomeProps> = ({ isLoggedIn, cart, setCart }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://fakestoreapi.com/products?limit=25"
+          "https://fakestoreapi.com/products?limit=50"
         );
         if (!response.ok) {
           throw new Error(
