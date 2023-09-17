@@ -17,18 +17,26 @@ function App() {
     items: [],
     total: 0,
   });
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   return (
     <>
       <div className="App">
-        <Header isLoggedIn={isLoggedIn} cart={cart} />
+        <Header isLoggedIn={isLoggedIn} cart={cart} onSearch={setSearchQuery} />
+
         <Routes>
           <Route
             path="/"
             element={
-              <Home isLoggedIn={isLoggedIn} cart={cart} setCart={setCart} />
+              <Home
+                isLoggedIn={isLoggedIn}
+                cart={cart}
+                setCart={setCart}
+                searchQuery={searchQuery}
+              />
             }
           />
+
           <Route path="/register" element={<Register />} />
           <Route
             path="/login"

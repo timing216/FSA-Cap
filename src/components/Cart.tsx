@@ -39,7 +39,7 @@ const Cart: React.FC<CartProps> = ({ cart, setCart }) => {
       ))}
       <div className="cartTotal">Total: ${cart.total}</div>
       <Link to="/checkout">
-        <button className="checkoutButton">Proceed to Checkout</button>
+        <button className="cartCheckoutButton">Proceed to Checkout</button>
       </Link>
     </div>
   );

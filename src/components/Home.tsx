@@ -16,9 +16,15 @@ interface HomeProps {
   setCart: React.Dispatch<
     React.SetStateAction<{ items: Product[]; total: number }>
   >;
+  searchQuery: string;
 }
 
-const Home: React.FC<HomeProps> = ({ isLoggedIn, cart, setCart }) => {
+const Home: React.FC<HomeProps> = ({
+  isLoggedIn,
+  cart,
+  setCart,
+  searchQuery,
+}) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
@@ -54,21 +60,25 @@ const Home: React.FC<HomeProps> = ({ isLoggedIn, cart, setCart }) => {
     <Container style={{ paddingBottom: "0px" }} className="headerContainer">
       <Row>
         <Col md={8}>
-          {products.map((product) => (
-            <Card key={product.id} style={{ marginBottom: "15px" }}>
-              <Card.Body>
-                <Card.Title>{product.title}</Card.Title>
-                {isLoggedIn && (
-                  <Button
-                    variant="primary"
-                    onClick={() => setSelectedProduct(product)}
-                  >
-                    View Details
-                  </Button>
-                )}
-              </Card.Body>
-            </Card>
-          ))}
+          {products
+            .filter((product) =>
+              product.title.toLowerCase().includes(searchQuery.toLowerCase())
+            )
+            .map((product) => (
+              <Card key={product.id} style={{ marginBottom: "15px" }}>
+                <Card.Body>
+                  <Card.Title>{product.title}</Card.Title>
+                  {isLoggedIn && (
+                    <Button
+                      variant="primary"
+                      onClick={() => setSelectedProduct(product)}
+                    >
+                      View Details
+                    </Button>
+                  )}
+                </Card.Body>
+              </Card>
+            ))}
         </Col>
         <Col md={4} className="sticky">
           {isLoggedIn && selectedProduct && (

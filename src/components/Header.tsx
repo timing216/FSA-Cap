@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import {
   Container,
   Navbar,
@@ -17,9 +18,13 @@ interface HeaderProps {
     items: Product[];
     total: number;
   };
+  onSearch: (query: string) => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ isLoggedIn, cart }) => {
+const Header: React.FC<HeaderProps> = ({ isLoggedIn, cart, onSearch }) => {
+  const [inputValue, setInputValue] = useState<string>("");
+  const location = useLocation();
+
   return (
     <Navbar bg="light" expand="lg">
       <Container style={{ paddingBottom: "0px" }} className="headerContainer">
@@ -36,21 +41,28 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, cart }) => {
 
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Form className="d-flex">
-              <FormControl
-                type="search"
-                placeholder="Search"
-                className="mr-2"
-                aria-label="Search"
-              />
-              <Button className="searchButton" variant="outline-info me-5">
-                Search
-              </Button>
-              {/* <Nav.Link as={Link} to="/cart" className="me-4">
-                <i className="bi bi-cart cartIcon"></i>
-              </Nav.Link> */}
-            </Form>
+            {location.pathname !== "/cart" &&
+              location.pathname !== "/checkout" && (
+                <Form className="d-flex">
+                  <FormControl
+                    type="search"
+                    placeholder="Search"
+                    className="mr-2"
+                    aria-label="Search"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
+                  <Button
+                    className="searchButton"
+                    variant="outline-info me-5"
+                    onClick={() => onSearch(inputValue)}
+                  >
+                    Search
+                  </Button>
+                </Form>
+              )}
           </Nav>
+
           {/* <div>
             Items in Cart: {cart.items.length}
             <br />
@@ -73,7 +85,8 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, cart }) => {
                   <div className="cartWrapper">
                     <i className="bi bi-cart cartIcon"></i>
                     <span className="cartDetails">
-                      Items: {cart.items.length} | Total: ${cart.total}
+                      Items: {cart.items.length} | Total: $
+                      {parseFloat(cart.total.toFixed(2))}
                     </span>
                   </div>
                 </Nav.Link>
