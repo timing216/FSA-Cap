@@ -233,13 +233,22 @@ body {
 }
 
 /* Payment and CheckoutForm Styles */
+.paymentForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 200px; /* Center the elements horizontally */
+}
 
-/* Payment Container */
-.paymentContainer {
-  background-color: #e6f7ff;
-  padding: 20px;
-  border-radius: 5px;
-  margin-top: 20px;
+.cardElementContainer {
+  margin-top: 5%;
+  margin-left: 10%;
+  width: 400px; /* Adjust this value based on your design needs */
+  margin-bottom: 100px; /* Space between CardElement and Pay button */
+}
+
+.payButton {
+  margin-bottom: 0px;
 }
 
 /* Stripe Card Element */

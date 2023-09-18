@@ -10,7 +10,7 @@ import Login from "./components/Login";
 import { useState } from "react";
 import { Product } from "./components/Home";
 import Checkout from "./components/Checkout";
-import Payment from "./components/Payment"; // Corrected the typo in the import
+import Payment from "./components/Payment";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
