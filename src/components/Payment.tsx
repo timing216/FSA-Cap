@@ -7,7 +7,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 
-const stripePromise = loadStripe("YOUR_STRIPE_PUBLISHABLE_KEY");
+const stripePromise = loadStripe("STRIPE_PUBLISHABLE_KEY");
 
 const CheckoutForm: React.FC = () => {
   const stripe = useStripe();

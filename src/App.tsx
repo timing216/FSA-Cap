@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import { useState } from "react";
 import { Product } from "./components/Home";
 import Checkout from "./components/Checkout";
+import Payment from "./components/Payment"; // Corrected the typo in the import
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,7 +37,6 @@ function App() {
               />
             }
           />
-
           <Route path="/register" element={<Register />} />
           <Route
             path="/login"
@@ -47,6 +47,7 @@ function App() {
             element={<Cart cart={cart} setCart={setCart} />}
           />
           <Route path="/checkout" element={<Checkout cart={cart} />} />
+          <Route path="/payment" element={<Payment />} />
           <Route path="/logout" element={<Logout />} />
         </Routes>
         <Footer />

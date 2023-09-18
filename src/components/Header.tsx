@@ -32,8 +32,8 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, cart, onSearch }) => {
           <img
             alt="AMASON Shop"
             src="./src/assets/Amason_logo.svg"
-            width="300"
-            height="300"
+            width="250"
+            height="0"
             className="AmasonLogo"
           />
         </Navbar.Brand>

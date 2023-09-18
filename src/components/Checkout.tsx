@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Container, Form, Button, Row, Col, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { Product } from "./Home";
 
 interface CheckoutProps {
@@ -26,6 +27,7 @@ const blacklistedCountries = [
 const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (blacklistedCountries.includes(selectedCountry)) {
@@ -35,6 +37,18 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
     }
   }, [selectedCountry]);
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // add logic like sending the form data to server
+    if (!blacklistedCountries.includes(selectedCountry)) {
+      // if the selected country is not blacklisted, proceed with the checkout.
+      console.log("Proceeding with checkout...");
+      navigate("/payment"); // Navigate to Payment.tsx
+    } else {
+      console.log("Cannot ship to this country.");
+    }
+  };
+
   return (
     <Container className="checkoutContainer">
       <Row>
@@ -43,9 +57,11 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
           <div className="cartTotal">
             Total: ${parseFloat(cart.total.toFixed(2))}
           </div>
-          <Form>
+
+          <Form onSubmit={handleFormSubmit}>
             <Form.Group>
               <Form.Label className="checkoutFormLabel">
+                <Form.Label className="checkoutFormLabel">Country</Form.Label>
                 <Form.Control
                   as="select"
                   className="checkoutInput"
@@ -245,19 +261,18 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
                   <option value="ZWE">Zimbabwe</option>
                 </Form.Control>
               </Form.Label>
-              <Form.Control type="text" className="checkoutInput" />
-            </Form.Group>
-
-            <Form.Group>
               <Form.Label className="checkoutFormLabel">
                 Full name (First and Last name, please use Alphabet)
               </Form.Label>
               <Form.Control type="text" className="checkoutInput" />
             </Form.Group>
+
             <Form.Group>
               <Form.Label className="checkoutFormLabel">
                 Phone number
               </Form.Label>
+            </Form.Group>
+            <Form.Group>
               <Form.Control type="tel" className="checkoutInput" />
               <Form.Text className="text-muted">
                 May be used to assist delivery (country code + area code+ phone
@@ -368,6 +383,11 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
               Checkout
             </Button>
           </Form>
+          {/* <Button variant="primary" type="submit" className="checkoutButton">
+              Checkout
+            </Button>
+          </Form> */}
+
           <Modal show={showPopup} onHide={() => setShowPopup(false)}>
             <Modal.Header closeButton>
               <Modal.Title>Shipping Restriction</Modal.Title>
