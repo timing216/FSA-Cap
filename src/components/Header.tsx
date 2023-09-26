@@ -81,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, cart, onSearch }) => {
             )}
             {isLoggedIn && (
               <>
-                <Nav.Link as={Link} to="/cart" className="me-5">
+                {cart.items.length === 0 || cart.total === 0 ? (
                   <div className="cartWrapper">
                     <i className="bi bi-cart cartIcon"></i>
                     <span className="cartDetails">
@@ -89,7 +89,17 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, cart, onSearch }) => {
                       {parseFloat(cart.total.toFixed(2))}
                     </span>
                   </div>
-                </Nav.Link>
+                ) : (
+                  <Nav.Link as={Link} to="/cart" className="me-5">
+                    <div className="cartWrapper">
+                      <i className="bi bi-cart cartIcon"></i>
+                      <span className="cartDetails">
+                        Items: {cart.items.length} | Total: $
+                        {parseFloat(cart.total.toFixed(2))}
+                      </span>
+                    </div>
+                  </Nav.Link>
+                )}
 
                 <Nav.Link href="/logout" className="logout">
                   Logout

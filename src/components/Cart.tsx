@@ -36,9 +36,16 @@ const Cart: React.FC<CartProps> = ({ cart, setCart }) => {
         </div>
       ))}
       <div className="cartTotal">Total: ${cart.total}</div>
-      <Link to="/checkout">
-        <button className="cartCheckoutButton">Proceed to Checkout</button>
-      </Link>
+
+      {cart.total > 0 ? (
+        <Link to="/checkout">
+          <button className="cartCheckoutButton">Proceed to Checkout</button>
+        </Link>
+      ) : (
+        <button className="cartCheckoutButton" disabled>
+          Proceed to Checkout
+        </button>
+      )}
     </div>
   );
 };

@@ -28,6 +28,9 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
+  const [countryError, setCountryError] = useState(false);
+  const [stateError, setStateError] = useState(false);
+  const [selectedState, setSelectedState] = useState("");
 
   useEffect(() => {
     if (blacklistedCountries.includes(selectedCountry)) {
@@ -39,7 +42,10 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // add logic like sending the form data to server
+
+    setCountryError(false);
+    setStateError(false);
+
     if (!blacklistedCountries.includes(selectedCountry)) {
       // if the selected country is not blacklisted, proceed with the checkout.
       console.log("Proceeding with checkout...");
@@ -47,6 +53,9 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
     } else {
       console.log("Cannot ship to this country.");
     }
+    if (selectedCountry === "") setCountryError(true);
+    if (selectedState === "") setStateError(true);
+    if (selectedCountry === "" || selectedState === "") return;
   };
 
   return (
@@ -260,11 +269,15 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
                   <option value="ZMB">Zambia</option>
                   <option value="ZWE">Zimbabwe</option>
                 </Form.Control>
+                {countryError && (
+                  <div className="error">Country is required</div>
+                )}{" "}
+                {/* New error message */}
               </Form.Label>
               <Form.Label className="checkoutFormLabel">
                 Full name (First and Last name, please use Alphabet)
               </Form.Label>
-              <Form.Control type="text" className="checkoutInput" />
+              <Form.Control type="text" className="checkoutInput" required />
             </Form.Group>
 
             <Form.Group>
@@ -273,7 +286,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
               </Form.Label>
             </Form.Group>
             <Form.Group>
-              <Form.Control type="tel" className="checkoutInput" />
+              <Form.Control type="tel" className="checkoutInput" required />
               <Form.Text className="text-muted">
                 May be used to assist delivery (country code + area code+ phone
                 number)
@@ -285,6 +298,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
                 type="text"
                 className="checkoutInput"
                 placeholder="Street address"
+                required
               />
               <Form.Control
                 type="text"
@@ -295,70 +309,76 @@ const Checkout: React.FC<CheckoutProps> = ({ cart }) => {
             <Row>
               <Form.Group as={Col}>
                 <Form.Label className="checkoutFormLabel">City</Form.Label>
-                <Form.Control type="text" className="checkoutInput" />
+                <Form.Control type="text" className="checkoutInput" required />
               </Form.Group>
 
               <Form.Group as={Col}>
                 <Form.Label className="checkoutFormLabel">State</Form.Label>
-                <Form.Control as="select" className="checkoutInput">
+                <Form.Control
+                  as="select"
+                  className="checkoutInput"
+                  value={selectedState}
+                  onChange={(e) => setSelectedState(e.target.value)}
+                >
                   <option value="">Select State</option>
                   <option value="AL">Alabama</option>
                   <option value="AK">Alaska</option>
                   <option value="AZ">Arizona</option>
-                  <option value="AR">Alabama</option>
-                  <option value="CA">Arkansas</option>
-                  <option value="CO">California</option>
-                  <option value="CT">Colorado</option>
-                  <option value="DE">Connecticut</option>
-                  <option value="FL">Delaware</option>
-                  <option value="GA">Florida</option>
-                  <option value="HI">Georgia</option>
-                  <option value="ID">Hawaii</option>
-                  <option value="IL">Idaho</option>
-                  <option value="IN">Illinois</option>
-                  <option value="IA">Indiana</option>
-                  <option value="KS">Iowa</option>
-                  <option value="KY">Kansas</option>
-                  <option value="LA">Kentucky</option>
-                  <option value="ME">Louisiana</option>
-                  <option value="MD">Maine</option>
-                  <option value="MA">Maryland</option>
-                  <option value="MI">Massachusetts</option>
-                  <option value="MN">Michigan</option>
-                  <option value="MS">Minnesota</option>
-                  <option value="MO">Mississippi</option>
-                  <option value="MT">Missouri</option>
-                  <option value="NE">Montana</option>
-                  <option value="NV">Nebraska</option>
-                  <option value="NH">Nevada</option>
-                  <option value="NJ">New Hampshire</option>
-                  <option value="NM">New Jersey</option>
-                  <option value="NY">New Mexico</option>
-                  <option value="NC">New York</option>
-                  <option value="ND">North Carolina</option>
-                  <option value="OH">North Dakota</option>
-                  <option value="OK">Ohio</option>
-                  <option value="OR">Oklahoma</option>
-                  <option value="PA">Oregon</option>
-                  <option value="RI">Pennsylvania</option>
-                  <option value="SC">Rhode Island</option>
-                  <option value="SD">South Carolina</option>
-                  <option value="TN">South Dakota</option>
-                  <option value="TX">Tennessee</option>
-                  <option value="UT">Texas</option>
-                  <option value="VT">Utah</option>
-                  <option value="VA">Vermont</option>
-                  <option value="WA">Virginia</option>
-                  <option value="WV">Washington</option>
-                  <option value="WI">West Virginia</option>
-                  <option value="WY">Wisconsin</option>
-                  <option value="AL">Wyoming</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="IA">Iowa</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="ME">Maine</option>
+                  <option value="MD">Maryland</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MT">Montana</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NY">New York</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VT">Vermont</option>
+                  <option value="VA">Virginia</option>
+                  <option value="WA">Washington</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WY">Wyoming</option>
                 </Form.Control>
+                {stateError && <div className="error">State is required</div>}{" "}
+                {/* New error message */}
               </Form.Group>
 
               <Form.Group as={Col}>
                 <Form.Label className="checkoutFormLabel">ZIP Code</Form.Label>
-                <Form.Control type="text" className="checkoutInput" />
+                <Form.Control type="text" className="checkoutInput" required />
               </Form.Group>
             </Row>
             <Form.Group>
